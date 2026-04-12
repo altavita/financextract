@@ -29,8 +29,12 @@ def download_hist_252(tickers, out_dir="data"):
             print(f"Nessun dato trovato per {t}, salto.")
             continue
 
-        # Tieni solo gli ultimi 252 record (se ce ne sono di più)
-        df = df.tail(252)
+        # Tieni solo gli ultimi 252 record e fai una copia esplicita
+        df = df.tail(252).copy()
+
+        # Calcola rendimenti giornalieri e il relativo percentile
+        df['Daily_Return'] = df['Close'].pct_change()
+        df['Return_Percentile'] = df['Daily_Return'].rank(pct=True)
 
         # Salva XLSX
         out_path = os.path.join(out_dir, f"{t}_hist_252d.xlsx")
