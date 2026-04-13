@@ -43,5 +43,5 @@ def download_hist_252(tickers, out_dir="data"):
 
 if __name__ == "__main__":
     # Inserisci qui i ticker che ti interessano
-    tickers = ["IBM", "GLD"]  
+    tickers = ["^GSPC", "AAPL"]  
     download_hist_252(tickers)
